@@ -1,0 +1,739 @@
+/* =============================================
+   PRIMER`S THEME — SIDEBAR (Frappe v16)
+   Light sidebar style: white background, dark
+   text, solid accent active pill.
+   Dark mode: brand-colored sidebar (override
+   block at bottom restores white-on-dark).
+   ============================================= */
+
+/* Override Frappe's sidebar width variables */
+:root {
+  --sidebar-width: var(--st-sidebar-width, 240px); /* expanded width */
+  --sidebar-border-color: rgba(0,0,0,0.08);
+  --sidebar-hover-color:  rgba(0,0,0,0.05);
+  --sidebar-active-color: var(--st-sidebar-active);
+}
+
+/* ── HIDE Frappe's native workspace-title header (shows app name + user) ── */
+.body-sidebar .sidebar-header,
+.body-sidebar a.sidebar-header {
+  display: none !important;
+}
+
+/* ── COMPANY BRANDING HEADER ── */
+/* One height for the sidebar header and the Icon Rail's brand tile, so
+   their bottom borders line up. */
+:root {
+  --st-sidebar-head-h: 52px;
+}
+#st-company-header {
+  height: var(--st-sidebar-head-h);
+  box-sizing: border-box;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+/* Text-only header (no icon — the Icon Rail's own brand tile already
+   covers that at the far-left edge). A collapsed 64px classic sidebar has
+   no room to show a readable name, so hide the whole header rather than
+   leave an empty bordered strip. */
+.body-sidebar-container:not(.expanded) #st-company-header {
+  display: none;
+}
+
+.st-company-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1C2333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* ── COLLAPSED: 64px icon-only sidebar ── */
+.body-sidebar {
+  width: 64px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  transition: width 0.25s ease !important;
+}
+
+/* ── EXPANDED: overlay at 240px (set by :root --sidebar-width) ── */
+.body-sidebar-container.expanded .body-sidebar {
+  width: var(--st-sidebar-width, var(--sidebar-width)) !important;
+}
+
+/* ── BACKGROUND: white in light mode, brand-colored in dark mode ── */
+.body-sidebar,
+.body-sidebar-container > .body-sidebar,
+.body-sidebar-container.expanded .body-sidebar {
+  background: var(--st-sidebar-bg) !important;
+  background-color: var(--st-sidebar-bg) !important;
+  border-right: 1px solid rgba(0,0,0,0.08) !important;
+}
+
+/* ── COLLAPSED: center icons, hide text labels ── */
+.body-sidebar-container:not(.expanded) .item-anchor {
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+.body-sidebar-container:not(.expanded) .sidebar-item-label {
+  width: 0 !important;
+  max-width: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  flex: 0 0 0 !important;
+  transition: max-width 0.3s cubic-bezier(0.4,0,0.2,1),
+              opacity 0.3s cubic-bezier(0.4,0,0.2,1) !important;
+}
+
+/* Hide section-break dividers in collapsed mode — no space for group titles */
+.body-sidebar-container:not(.expanded) .section-break,
+.body-sidebar-container:not(.expanded) .sidebar-item-container.section-item {
+  display: none !important;
+}
+
+/* ── EXPANDED: restore labels with smooth animation ── */
+.body-sidebar-container.expanded .sidebar-item-label {
+  width: auto !important;
+  max-width: 160px !important;
+  opacity: 1 !important;
+  flex: 1 1 auto !important;
+  transition: max-width 0.3s cubic-bezier(0.4,0,0.2,1),
+              opacity 0.3s cubic-bezier(0.4,0,0.2,1) !important;
+}
+
+.body-sidebar-container.expanded .item-anchor {
+  justify-content: flex-start !important;
+}
+
+.body-sidebar-container.expanded .section-break,
+.body-sidebar-container.expanded .sidebar-item-container.section-item {
+  display: block !important;
+}
+
+/* Placeholder that reserves layout space when sidebar is expanded */
+.body-sidebar-placeholder {
+  width: var(--st-sidebar-width, var(--sidebar-width)) !important;
+  transition: width 0.25s ease !important;
+}
+
+/* ---- Sidebar Items ---- */
+/* 4-class chain beats Frappe's 3-class rule; covers top-level AND nested items */
+.body-sidebar-container .body-sidebar .standard-sidebar-item .item-anchor,
+.body-sidebar-container .body-sidebar .nested-container .standard-sidebar-item .item-anchor,
+.body-sidebar-container .body-sidebar .standard-sidebar-item.indent .item-anchor {
+  color: var(--st-sidebar-text, #374151) !important;
+  border-radius: 8px !important;
+  padding: 2px 4px !important;
+}
+
+.body-sidebar-container .body-sidebar .standard-sidebar-item:not(.active-sidebar) .item-anchor:hover,
+.body-sidebar-container .body-sidebar .standard-sidebar-item:not(.active-sidebar):has(a:not(.section-break)):hover,
+.body-sidebar-container .body-sidebar .nested-container .standard-sidebar-item:not(.active-sidebar) .item-anchor:hover {
+  background-color: var(--st-sidebar-hover, rgba(0,0,0,0.05)) !important;
+  color: var(--st-sidebar-hover-text, var(--st-sidebar-text, #111827)) !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+}
+
+/* Active/selected item — solid accent pill with contrast-aware text */
+.body-sidebar-container .body-sidebar .standard-sidebar-item.active-sidebar .item-anchor,
+.body-sidebar-container .body-sidebar .nested-container .standard-sidebar-item.active-sidebar .item-anchor {
+  background: var(--st-sidebar-active, var(--st-accent)) !important;
+  color: var(--st-sidebar-active-text, #ffffff) !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  border-left: none !important;
+}
+
+/* Keep every child readable against the configured active background */
+.body-sidebar-container .body-sidebar .standard-sidebar-item.active-sidebar .item-anchor .sidebar-item-label,
+.body-sidebar-container .body-sidebar .standard-sidebar-item.active-sidebar .item-anchor span,
+.body-sidebar-container .body-sidebar .standard-sidebar-item.active-sidebar .item-anchor a,
+.body-sidebar-container .body-sidebar .nested-container .standard-sidebar-item.active-sidebar .item-anchor .sidebar-item-label,
+.body-sidebar-container .body-sidebar .nested-container .standard-sidebar-item.active-sidebar .item-anchor span {
+  color: var(--st-sidebar-active-text, #ffffff) !important;
+}
+
+/* ---- Icons ---- */
+.body-sidebar-container .body-sidebar .standard-sidebar-item .sidebar-item-icon,
+.body-sidebar-container .body-sidebar .standard-sidebar-item .sidebar-item-icon.text-ink-gray-7 {
+  color: var(--st-sidebar-icon, var(--st-sidebar-text-muted, #6B7280)) !important;
+}
+
+.body-sidebar-container .body-sidebar .standard-sidebar-item .sidebar-item-icon svg use,
+.body-sidebar-container .body-sidebar .standard-sidebar-item .sidebar-item-icon svg {
+  color: var(--st-sidebar-icon, var(--st-sidebar-text-muted, #6B7280)) !important;
+  stroke: currentColor !important;
+}
+
+.body-sidebar-container .body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-icon,
+.body-sidebar-container .body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-icon.text-ink-gray-7,
+.body-sidebar-container .body-sidebar .nested-container .standard-sidebar-item.active-sidebar .sidebar-item-icon {
+  color: var(--st-sidebar-active-text, #ffffff) !important;
+}
+
+.body-sidebar-container .body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-icon svg use,
+.body-sidebar-container .body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-icon svg,
+.body-sidebar-container .body-sidebar .nested-container .standard-sidebar-item.active-sidebar .sidebar-item-icon svg {
+  color: var(--st-sidebar-active-text, #ffffff) !important;
+  stroke: currentColor !important;
+}
+
+.body-sidebar-container .body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-icon .es-icon,
+.body-sidebar-container .body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-icon .icon,
+.body-sidebar-container .body-sidebar .nested-container .standard-sidebar-item.active-sidebar .sidebar-item-icon .es-icon,
+.body-sidebar-container .body-sidebar .nested-container .standard-sidebar-item.active-sidebar .sidebar-item-icon .icon {
+  color: var(--st-sidebar-active-text, #ffffff) !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* ---- Labels ---- */
+.body-sidebar-container .body-sidebar .standard-sidebar-item .sidebar-item-label {
+  color: inherit !important;
+}
+
+/* Section break / group labels */
+.body-sidebar .sidebar-item-container.section-item .item-anchor .sidebar-item-label,
+.body-sidebar .section-break .sidebar-item-label {
+  color: var(--st-sidebar-text-muted, #9CA3AF) !important;
+  font-size: 10px !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+}
+
+/* ---- Dividers ---- */
+.body-sidebar .divider {
+  border-color: rgba(0,0,0,0.06) !important;
+}
+
+/* ---- Hide Frappe native search/notification from sidebar (handled by our custom toolbar) ---- */
+.body-sidebar .navbar-search-bar,
+.body-sidebar .sidebar-notification,
+.body-sidebar .dropdown-notifications,
+.body-sidebar .standard-items-sections {
+  display: none !important;
+}
+
+/* ---- Bottom area: hide user section — moved to top toolbar ---- */
+.body-sidebar .body-sidebar-bottom .nav-item.dropdown-navbar-user,
+.body-sidebar .body-sidebar-bottom .dropdown-mobile,
+.body-sidebar .sidebar-user-button {
+  display: none !important;
+}
+
+/* ---- Onboarding / Getting Started link ---- */
+.body-sidebar .onboarding-sidebar {
+  color: #6B7280 !important;
+}
+
+.body-sidebar .onboarding-sidebar:hover {
+  color: #111827 !important;
+}
+
+/* ---- Collapse sidebar link ---- */
+.body-sidebar .collapse-sidebar-link,
+.body-sidebar .collapse-sidebar-link span {
+  color: #6B7280 !important;
+}
+
+.body-sidebar .collapse-sidebar-link:hover,
+.body-sidebar .collapse-sidebar-link:hover span {
+  color: #111827 !important;
+  text-decoration: none !important;
+}
+
+/* ---- Resize handle ---- */
+.body-sidebar .sidebar-resize-handle {
+  background: rgba(0,0,0,0.04) !important;
+}
+
+.body-sidebar .sidebar-resize-handle:hover {
+  background: rgba(0,0,0,0.08) !important;
+}
+
+/* ---- Sidebar icons for svg .es-icon ---- */
+.body-sidebar .sidebar-item-icon .es-icon,
+.body-sidebar .sidebar-item-icon .icon {
+  color: #6B7280 !important;
+  fill: #6B7280 !important;
+}
+
+.body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-icon .es-icon,
+.body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-icon .icon {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+/* ---- Custom scrollbar inside sidebar ---- */
+.body-sidebar .body-sidebar-top::-webkit-scrollbar { width: 3px; }
+.body-sidebar .body-sidebar-top::-webkit-scrollbar-track { background: transparent; }
+.body-sidebar .body-sidebar-top::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.15);
+  border-radius: 4px;
+}
+
+/* ---- Sidebar placeholder (reserves space in layout) ---- */
+.body-sidebar-container .body-sidebar-placeholder {
+  background: var(--st-sidebar-bg) !important;
+}
+
+/* ---- Tooltip for collapsed sidebar items — always dark ---- */
+.st-sidebar-tooltip {
+  position: fixed;
+  left: 72px;
+  background: #1e1e2e;
+  color: rgba(255,255,255,0.9);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+.st-sidebar-tooltip.visible {
+  opacity: 1;
+}
+
+.st-rail-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---- Chevron toggle button rotation ---- */
+.body-sidebar .collapse-sidebar-link svg,
+.body-sidebar .collapse-sidebar-link .icon {
+  transition: transform 0.25s ease;
+}
+.body-sidebar-container.expanded .collapse-sidebar-link svg,
+.body-sidebar-container.expanded .collapse-sidebar-link .icon {
+  transform: rotate(180deg);
+}
+
+/* ══════════════════════════════════════════════════════════
+   DARK MODE — sidebar is brand-colored → restore white text
+   ══════════════════════════════════════════════════════════ */
+html[data-theme="dark"] .body-sidebar,
+html[data-theme="dark"] .body-sidebar-container > .body-sidebar {
+  border-right: 1px solid rgba(255,255,255,0.06) !important;
+}
+html[data-theme="dark"] #st-company-header {
+  border-bottom-color: rgba(255,255,255,0.08) !important;
+}
+html[data-theme="dark"] .st-company-name {
+  color: rgba(255,255,255,0.92) !important;
+}
+html[data-theme="dark"] .body-sidebar .standard-sidebar-item .item-anchor {
+  color: var(--st-sidebar-text, rgba(255,255,255,0.75)) !important;
+}
+html[data-theme="dark"] .body-sidebar .standard-sidebar-item:not(.active-sidebar) .item-anchor:hover {
+  background-color: var(--st-sidebar-hover, rgba(255,255,255,0.1)) !important;
+  color: var(--st-sidebar-hover-text, #fff) !important;
+}
+html[data-theme="dark"] .body-sidebar .standard-sidebar-item.active-sidebar .item-anchor {
+  background: var(--st-sidebar-active, color-mix(in srgb, var(--st-accent) 15%, transparent)) !important;
+  color: var(--st-sidebar-active-text, var(--st-accent)) !important;
+  border-left: 3px solid var(--st-sidebar-active, var(--st-accent)) !important;
+  padding-left: 5px !important;
+}
+html[data-theme="dark"] .body-sidebar .standard-sidebar-item .sidebar-item-icon {
+  color: var(--st-sidebar-icon, rgba(255,255,255,0.7)) !important;
+}
+html[data-theme="dark"] .body-sidebar .standard-sidebar-item .sidebar-item-icon svg use,
+html[data-theme="dark"] .body-sidebar .standard-sidebar-item .sidebar-item-icon svg {
+  color: var(--st-sidebar-icon, rgba(255,255,255,0.7)) !important;
+  stroke: currentColor !important;
+}
+html[data-theme="dark"] .body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-icon svg use,
+html[data-theme="dark"] .body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-icon svg {
+  color: var(--st-sidebar-active-text, var(--st-accent)) !important;
+  stroke: currentColor !important;
+}
+html[data-theme="dark"] .body-sidebar .sidebar-item-container.section-item .item-anchor .sidebar-item-label,
+html[data-theme="dark"] .body-sidebar .section-break .sidebar-item-label {
+  color: var(--st-sidebar-text-muted, rgba(255,255,255,0.35)) !important;
+}
+html[data-theme="dark"] .body-sidebar .divider {
+  border-color: rgba(255,255,255,0.08) !important;
+}
+html[data-theme="dark"] .body-sidebar .onboarding-sidebar {
+  color: rgba(255,255,255,0.5) !important;
+}
+html[data-theme="dark"] .body-sidebar .onboarding-sidebar:hover {
+  color: rgba(255,255,255,0.9) !important;
+}
+html[data-theme="dark"] .body-sidebar .collapse-sidebar-link,
+html[data-theme="dark"] .body-sidebar .collapse-sidebar-link span {
+  color: rgba(255,255,255,0.5) !important;
+}
+html[data-theme="dark"] .body-sidebar .collapse-sidebar-link:hover,
+html[data-theme="dark"] .body-sidebar .collapse-sidebar-link:hover span {
+  color: rgba(255,255,255,0.9) !important;
+}
+html[data-theme="dark"] .body-sidebar .sidebar-resize-handle {
+  background: rgba(255,255,255,0.05) !important;
+}
+html[data-theme="dark"] .body-sidebar .sidebar-resize-handle:hover {
+  background: rgba(255,255,255,0.12) !important;
+}
+html[data-theme="dark"] .body-sidebar .body-sidebar-top::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+}
+html[data-theme="dark"] .body-sidebar .sidebar-item-icon .es-icon,
+html[data-theme="dark"] .body-sidebar .sidebar-item-icon .icon {
+  color: rgba(255,255,255,0.7) !important;
+  fill: rgba(255,255,255,0.7) !important;
+}
+html[data-theme="dark"] .body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-icon .es-icon,
+html[data-theme="dark"] .body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-icon .icon {
+  color: var(--st-accent) !important;
+  fill: var(--st-accent) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ICON RAIL — opt-in second sidebar column (Theme Studio: Sidebar Layout)
+   Everything below is additive and scoped under body.st-sidebar-layout-rail,
+   so the default Tree layout above is completely unaffected.
+   ═════════════════════════════════════════════════════════════════════════ */
+#st-icon-rail {
+  display: flex;
+  flex-direction: column;
+  width: var(--st-rail-width, 72px);
+  height: 100vh;
+  height: 100dvh;
+  background: var(--st-sidebar-bg, #FFFFFF);
+  border-right: 1px solid var(--sidebar-border-color, #ededed);
+  flex-shrink: 0;
+  transition: width 0.2s ease;
+}
+/* Mirrors the equivalent .body-sidebar rule below — keeps the rail clear of
+   the fixed top toolbar this theme always adds via .st-has-toolbar. */
+body.st-has-toolbar #st-icon-rail {
+  margin-top: var(--st-header-height) !important;
+  height: calc(100vh - var(--st-header-height)) !important;
+  height: calc(100dvh - var(--st-header-height)) !important;
+}
+/* Company logo/icon, pinned at the top — its one dedicated home in the
+   entire sidebar chrome; the classic sidebar's own #st-company-header is
+   text-only by design so the logo is never shown twice. */
+#st-icon-rail .st-rail-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 100%;
+  height: var(--st-sidebar-head-h);
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--sidebar-border-color, #ededed);
+}
+#st-icon-rail .st-rail-brand img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+#st-icon-rail .st-rail-brand-fallback {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: var(--st-rail-bg, var(--st-accent));
+  color: var(--st-rail-icon-color, #FFFFFF);
+  font-size: 13px;
+  font-weight: 700;
+}
+/* Scrollable item list above a pinned collapse toggle, not the whole rail —
+   so the toggle stays reachable regardless of list length. */
+#st-icon-rail .st-rail-items {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 10px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+/* Still scrolls (wheel, touch, keyboard), but without a bar: on Frappe 16.50
+   the active app's modules make the list taller than the window, and a
+   visible bar narrows the 72px column enough to split labels mid-word. */
+#st-icon-rail .st-rail-items {
+  scrollbar-width: none;
+}
+#st-icon-rail .st-rail-items::-webkit-scrollbar {
+  display: none;
+}
+/* One icon per installed app — icon sits in a theme-colored tile (driven by
+   --st-rail-bg, which defaults to the theme's own accent color, so it
+   updates automatically if the admin changes brand/accent colors), with the
+   app's friendly name below. The active app gets a ring around its tile
+   rather than an inverted color scheme, so label/tile contrast never has to
+   be recomputed per state. */
+#st-icon-rail .st-rail-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 4px;
+  border-radius: 9px;
+  text-decoration: none !important;
+  cursor: pointer;
+}
+#st-icon-rail .st-rail-app:hover {
+  background: var(--sidebar-hover-color, #f3f3f3);
+  text-decoration: none !important;
+}
+#st-icon-rail .st-rail-app-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--st-rail-bg, var(--st-accent));
+  color: var(--st-rail-icon-color, #FFFFFF);
+  /* frappe.utils.icon()'s <svg class="icon"> renders via the fill/stroke
+     custom properties Frappe's own icons.scss declares (--icon-fill/
+     --icon-stroke) — NOT via `color`/currentColor. Without this override
+     each tile's glyph silently inherits whatever --icon-stroke the page
+     happens to have ambient (a neutral gray meant for icons sitting
+     directly on the page background), uncoordinated with this tile's own
+     accent-colored background, making icons vanish rather than merely
+     look off. --icon-fill stays untouched: Frappe's icon set is already
+     transparent-fill/stroke-only in both light and dark mode. */
+  --icon-stroke: var(--st-rail-icon-color, #FFFFFF);
+}
+#st-icon-rail .st-rail-app-icon svg { width: 16px; height: 16px; }
+#st-icon-rail .st-rail-app-fallback { font-size: 13px; font-weight: 700; }
+/* Apps that ship an official logo show it as-is on a neutral surface; the
+   workspace glyph stays in the DOM (hidden) and returns if the image fails. */
+#st-icon-rail .st-rail-app-icon.has-logo {
+  background: var(--st-sidebar-bg, var(--bg-color));
+  box-shadow: inset 0 0 0 1px var(--sidebar-border-color, var(--border-color));
+  overflow: hidden;
+}
+#st-icon-rail .st-rail-app-icon.has-logo .st-rail-app-glyph { display: none; }
+#st-icon-rail .st-rail-app-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: inherit;
+}
+#st-icon-rail .st-rail-app.st-rail-active .st-rail-app-icon {
+  box-shadow: 0 0 0 2px var(--st-sidebar-bg, #FFFFFF), 0 0 0 3px var(--st-rail-active, var(--st-accent));
+}
+#st-icon-rail .st-rail-app-label {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--st-sidebar-text, #374151);
+  text-align: center;
+  max-width: 100%;
+  overflow: hidden;
+  /* Two lines, so "Frappe HR" / "Frappe Framework" wrap instead of
+     truncating to "Frappe ..." in the 72px rail. */
+  white-space: normal;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+#st-icon-rail .st-rail-app.st-rail-active .st-rail-app-label {
+  color: var(--st-rail-active, var(--st-accent));
+}
+
+/* Modules of the active app (Frappe 16.50+, where module switching moved
+   into Frappe's Dock). Listed right under the active app's tile, as smaller
+   ghost tiles on a recessed track, so the app → module hierarchy reads at a
+   glance and the rail stays one column. */
+#st-icon-rail .st-rail-modules {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 2px 0 6px;
+  padding: 4px 2px;
+  border-radius: 10px;
+  background: var(--sidebar-hover-color, var(--st-hover));
+}
+#st-icon-rail .st-rail-module {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+  padding: 4px 2px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--st-sidebar-text-muted, var(--text-muted));
+  cursor: pointer;
+  --icon-stroke: var(--st-sidebar-text-muted, var(--text-muted));
+}
+#st-icon-rail .st-rail-module:hover {
+  background: var(--st-sidebar-bg, var(--bg-color));
+  color: var(--st-sidebar-text, var(--text-color));
+  --icon-stroke: var(--st-sidebar-text, var(--text-color));
+}
+#st-icon-rail .st-rail-module:focus-visible {
+  outline: 2px solid var(--st-rail-active, var(--st-accent));
+  outline-offset: -2px;
+}
+#st-icon-rail .st-rail-module-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+}
+#st-icon-rail .st-rail-module-icon svg { width: 16px; height: 16px; }
+#st-icon-rail .st-rail-module-label {
+  max-width: 100%;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.15;
+  text-align: center;
+  white-space: nowrap;
+}
+#st-icon-rail .st-rail-module.st-rail-module-active {
+  color: var(--st-rail-active, var(--st-accent));
+  --icon-stroke: var(--st-rail-active, var(--st-accent));
+}
+#st-icon-rail .st-rail-module.st-rail-module-active .st-rail-module-icon {
+  background: var(--st-sidebar-bg, var(--bg-color));
+  box-shadow: inset 0 0 0 1px var(--st-rail-active, var(--st-accent));
+}
+#st-icon-rail .st-rail-module.st-rail-module-active .st-rail-module-label {
+  font-weight: 700;
+}
+
+/* Phones: Frappe 16.50 closes the sidebar drawer by making .body-sidebar
+   transparent and click-through (sidebar.scss, media-breakpoint-down(sm)).
+   The theme's forced sidebar background would keep painting the closed
+   drawer as an empty strip over the page, so let it stay transparent. */
+/* Phones (Frappe's sm breakpoint): a permanent 72px rail took a fifth of a
+   390px screen and squeezed every list and form. The rail now lives in
+   Frappe's own sidebar drawer instead — hidden with the drawer, and shown at
+   the drawer's left edge (apps + modules beside the module's sidebar) while
+   ☰ has it open. Frappe still owns opening/closing and the scrim. */
+@media (max-width: 767.98px) {
+  body #st-icon-rail {
+    display: none;
+  }
+  body:has(.body-sidebar-container.expanded) #st-icon-rail {
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: var(--st-header-height, 0px);
+    bottom: 0;
+    width: var(--st-rail-width, 72px);
+    height: auto !important;
+    margin-top: 0 !important;
+    z-index: 1023;
+  }
+  body:has(#st-icon-rail) .body-sidebar-container.expanded .body-sidebar {
+    left: var(--st-rail-width, 72px);
+  }
+  body:has(#st-icon-rail) .body-sidebar-container.expanded .overlay {
+    left: calc(var(--sidebar-width) + var(--st-rail-width, 72px));
+    width: calc(100vw - var(--sidebar-width) - var(--st-rail-width, 72px));
+  }
+  /* The drawer is closed by its scrim, so the rail's own collapse toggle and
+     icon-only state have no use here. `body` outranks the base rules below. */
+  body #st-icon-rail .st-rail-collapse {
+    display: none;
+  }
+  body #st-icon-rail.is-collapsed .st-rail-app-label {
+    display: -webkit-box;
+  }
+  body #st-icon-rail.is-collapsed .st-rail-module-label {
+    display: block;
+  }
+}
+/* 320–400px phones: rail (72px) + a 240px drawer left ~8px of scrim to tap
+   to close it. Narrow the drawer so at least 48px of scrim stays. */
+@media (max-width: 400px) {
+  body:has(#st-icon-rail) .body-sidebar-container.expanded {
+    --sidebar-width: min(240px, calc(100vw - var(--st-rail-width, 72px) - 48px));
+  }
+  body:has(#st-icon-rail) .body-sidebar-container.expanded .body-sidebar {
+    width: var(--sidebar-width) !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  html[data-theme] .body-sidebar-container:not(.expanded) > .body-sidebar {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+  }
+}
+
+/* With the Icon Rail off, Frappe 16.50's own Dock is shown: give it the
+   theme's sidebar surface so it reads as part of the same shell. */
+html[data-st-nav="dock"] {
+  --dock-bg: var(--st-sidebar-bg, var(--desk-sidebar-bg));
+}
+
+/* Collapse toggle — pinned at the bottom, mirrors Frappe core's own
+   .collapse-sidebar-link (chevron icon, same interaction pattern). */
+#st-icon-rail .st-rail-collapse {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 32px;
+  padding: 6px 12px;
+  border: 0;
+  border-top: 1px solid var(--sidebar-border-color, #ededed);
+  background: transparent;
+  color: var(--st-sidebar-text-muted, #9ca3af);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  /* See .st-rail-app-icon's --icon-stroke comment: frappe.utils.icon()'s
+     svg reads --icon-stroke, not `color`, so the chevron needs its own
+     explicit value to actually be visible. */
+  --icon-stroke: var(--st-sidebar-text-muted, #9ca3af);
+}
+#st-icon-rail .st-rail-collapse:hover {
+  background: var(--sidebar-hover-color, #f3f3f3);
+}
+#st-icon-rail .st-rail-collapse-icon svg { width: 14px; height: 14px; }
+
+/* Collapsed: icon tiles only, no labels, narrow fixed width — matching the
+   classic sidebar's own icon-only collapsed state. */
+#st-icon-rail.is-collapsed {
+  width: 60px;
+}
+#st-icon-rail.is-collapsed .st-rail-label,
+#st-icon-rail.is-collapsed .st-rail-collapse .st-rail-label {
+  display: none;
+}
+#st-icon-rail.is-collapsed .st-rail-collapse {
+  justify-content: center;
+}
+
+html[data-theme="dark"] #st-icon-rail {
+  border-right-color: rgba(255,255,255,0.08);
+}
+html[data-theme="dark"] #st-icon-rail .st-rail-app:hover {
+  background: rgba(255,255,255,0.06);
+}
+html[data-theme="dark"] #st-icon-rail .st-rail-collapse:hover {
+  background: rgba(255,255,255,0.06);
+}

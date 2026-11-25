@@ -1,0 +1,310 @@
+# Primers Desk
+
+> A professional white-label theme for Frappe/ERPNext v16 that makes your ERP look and feel like a modern SaaS product.
+
+[![Available on Frappe Cloud Marketplace](https://img.shields.io/badge/Frappe%20Cloud-Marketplace-0089FF)](https://cloud.frappe.io/marketplace/apps/primers_desk)
+
+**Available on Frappe Cloud Marketplace** — install Primers Desk on your Frappe Cloud site in one click: [cloud.frappe.io/marketplace/apps/primers_desk](https://cloud.frappe.io/marketplace/apps/primers_desk)
+
+![Primers Desk](docs/screenshots/smart-home.png)
+
+---
+
+## New in 3.0 — Workspace Classic
+
+A second desk layout: a **top menu bar** instead of the sidebar, an **app home screen** and **sheet-style forms**. Works on every Frappe v16 release (v16.0 – v16.50+), on desktop, tablet and phone.
+
+![Workspace Classic: top menu bar](docs/screenshots/workspace-classic/top-menu-bar.png)
+
+**Top menu bar** — the current module's menus sit in one bar at the top. Menus that don't fit fold into **More**; on phones and tablets they open from ☰.
+
+| App home screen | On a phone |
+|---|---|
+| ![App home screen](docs/screenshots/workspace-classic/app-home.png) | <img src="docs/screenshots/workspace-classic/app-home-phone.png" alt="App home screen on a phone" width="260"> |
+
+**App home screen** — open it from the apps button (⋮⋮⋮) or `Alt+H`, type to search and use the arrow keys to open an app. It has its own address (`/desk/all-apps`), so Back and refresh work.
+
+![Sheet-style form with status steps](docs/screenshots/workspace-classic/sheet-form.png)
+
+**Sheet-style forms** — forms sit on a white sheet with status steps (workflow states, or Draft → Submitted/Paid) and a corner ribbon for paid, cancelled and disabled records.
+
+### Try it in one click
+
+After the update, everyone who may choose a theme sees a small card once, and System Managers also see the choices in Frappe's "Updated to a new version" notes:
+
+| The card | In the update notes |
+|---|---|
+| ![New in Primers Desk 3.0 card](docs/screenshots/workspace-classic/announcement-card.png) | ![Try it in the update dialog](docs/screenshots/workspace-classic/update-dialog.png) |
+
+| Button | What happens |
+|---|---|
+| **Try it now** | Switches only your own Desk to Workspace Classic (the page reloads). A bar then offers **Keep it** or **Switch back**. |
+| **Not now** | Hides the card for this session (it comes back at most 3 times). |
+| **Don't show again** | Hides it for good. |
+| **Make it the default for everyone** (System Managers) | Opens Theme Studio with Workspace Classic loaded as a draft (below). Nothing changes for others until you click **Publish theme**. |
+
+![Theme Studio with Workspace Classic loaded as a draft](docs/screenshots/workspace-classic/make-default-studio.png)
+
+You can switch any time from **All Options → Appearance → Theme profile**, or for the whole site in **Theme Studio → Layout → Desk layout**. Turn the card off in **Theme Studio → Theme assignments & permissions → Show feature announcements**.
+
+Upgrading is safe: no Frappe version is dropped and your current layout stays until someone switches.
+
+---
+
+## The Problem
+
+ERPNext is powerful. But the default interface is overwhelming — too many menus, outdated design, and non-technical users struggle to find anything. Businesses reject ERPNext because it "doesn't look professional" or "is too hard to use."
+
+**Primers Desk solves this.** Install it once and your ERPNext looks and feels like a tool people actually enjoy using — without touching a single line of your business logic.
+
+---
+
+## What You Get
+
+### Command Palette — `Ctrl+K`
+Press `Ctrl+K` from anywhere. Type what you're looking for — a document, a list, a setting — and navigate instantly. No menu hunting. No memorizing paths.
+
+### White-Label Branding
+Open Theme Studio, enter your company name, upload your logo, pick your two brand colors, then publish. The entire system — sidebar, navbar, login page, buttons — instantly becomes your brand.
+
+### Theme Studio — Visual Drag & Drop Editor
+Open **Theme Studio** from `Ctrl+K` or `/desk/theme-studio`. It is now the single user-facing home for theme settings, branding, feature toggles, and visual editing. Preview the result on dashboard, form, table, and login scenes; drag dashboard blocks into a new order; compare desktop/tablet/mobile and Frappe Default views; undo or reset changes; save a draft; then publish.
+
+Theme Studio includes Light, Dark, High Contrast, Frappe Default, Primer`s, and Forest profiles. System Managers can create, duplicate, rename, update, delete, import, export, schedule, and restore profiles. Themes can be assigned site-wide or by user, role, and company, while optional per-user profile selection and administrator locking control who can personalize the Desk.
+
+Every Studio token is rendered into the real Desk and login page, including the top toolbar and actual Frappe sidebar. Publishing creates a restorable backup and refreshes connected sessions without requiring an asset rebuild.
+
+#### Theme Studio visual guide
+
+See the [complete Theme Studio visual guide](docs/theme-studio.md) for every settings group, responsive preview mode, publishing workflow, and contextual property editor.
+
+[![Theme Studio contextual property editor](docs/screenshots/theme-studio/floating/05-dashboard-chart.png)](docs/theme-studio.md)
+
+#### Theme Studio capability map
+
+| Area | Included controls |
+|---|---|
+| Presets and profiles | Bundled presets, custom profiles, duplicate, rename, delete, import/export |
+| Main colours | Brand, accent, page/card/text/link/border, and semantic status colours |
+| Navbar and sidebar | Background/text/icon/active/hover colours, width, mode, auto-collapse, logo placement |
+| Buttons and forms | Button sizing/shape, inputs, focus, checkbox/toggle, dropdown, read-only/disabled |
+| Typography | Font family or web font, base/heading/label/table sizes, weight, line height |
+| Cards, lists, and tables | Surface, shadow, radius, row height/states, density, report grid |
+| Workspace and dashboard | Cards, shortcuts, number cards, chart system, icons, width, empty states |
+| Login branding | Logo, image/gradient, card opacity, title, copy, favicon, footer, optional platform credit |
+| Layout | Full/boxed width, margins, gaps, spacing, global radius, header height, sticky regions |
+| Assignment and activation | Site/user/role/company profiles, user permission, admin lock, scheduled activation |
+| Preview and recovery | Live Desk preview, four scenes, devices, draft, undo/redo, versions, reset, cache reload |
+| Accessibility | WCAG AA warning/enforcement, high contrast, large text, focus outlines, colour-blind palettes |
+| Developer tools | Custom CSS/JS, CSS variables, DocType/page/workspace rules, class mappings, raw JSON |
+
+Custom JavaScript is disabled by default and should only be enabled for trusted administrator-authored code. Hiding platform branding should only be used where your licensing and implementation permit it.
+
+### Quick Color Presets
+Four one-click starting points appear in Theme Studio. Pick one and the brand and accent colors update instantly. Includes Primer`s (Navy + Orange), Forest (Green + Gold), Midnight (Slate + Violet), and Plum (Purple + Amber). Use as-is or fine-tune every token afterward.
+
+### Auto Color System
+You set one brand color. The system automatically generates your complete color palette — backgrounds, hover states, borders, shadows — using CSS `color-mix()`. Change your brand color and everything updates instantly. No developer needed.
+
+### Icon Rail Sidebar
+A slim, always-visible app-icon column sits beside the classic workspace list — one compact tile per installed app (ERPNext, CRM, Frappe HR, and so on), each showing that app's official logo (apps without one fall back to their workspace icon in a theme-colored tile that follows your brand/accent color). New apps and workspaces appear on the rail automatically. Collapses to icon-only via its own toggle, independent of the classic sidebar. Switch back to the classic single-column Tree layout at any time from Theme Studio → Navbar & Sidebar → Sidebar Layout.
+
+### Slide-In Row Editor
+Child table rows (Sales Invoice Items, and any other grid) open in a full-height panel that slides in from the right instead of expanding inline in the table — header stays pinned with row actions (Duplicate, Move, Insert Above/Below, Delete), footer stays pinned with keyboard shortcut hints. Closes via the dimming backdrop, `Esc`, or Frappe's own controls; row switching and `Ctrl+↑`/`Ctrl+↓` navigation work exactly as before. Toggle it off in Theme Studio → Layout to fall back to the classic inline row editor.
+
+### Dark Mode — Light / Dark / Auto
+One click cycles between light, dark, and auto. Auto follows your operating system theme and switches live when the OS does. Both modes respect your brand colors. Works on every page.
+
+### Display Density — Comfortable / Compact
+A display density toggle. Compact mode tightens list rows, forms, and menus so power users see more data per screen. Per-user, with a site-wide default in Theme Studio.
+
+### Font Size Control
+Set a site-wide base font size in Theme Studio, and let each user fine-tune with A− / A / A+ from the All Options panel.
+
+### Modern Login Page
+A full-screen branded login experience with your company logo and colors, a slow-drifting ambient color backdrop generated from your brand palette, and a soft card entrance animation. First impression that sets the right tone for your team.
+
+**Login Page Designer** (*Login Page Settings*): works out of the box — your default Company's name and logo are picked up automatically and every text field has ready-made, business-neutral copy you can rename. Switch to a split-screen layout with a branded hero panel (headline, badge, up to 4 feature cards, background image or gradient) beside the sign-in card. Branding is auto-filled from Theme Studio, and every stock sign-in flow (password, forgot password, sign up, email link, LDAP, social, 2FA) keeps working. *Preview Login* shows either layout to admins before it goes live; sign-in is disabled while previewing.
+
+### Premium Motion & Depth
+A polish layer across the whole desk: smooth, consistent transitions on every interactive element, layered card shadows with a subtle hover lift, gradient primary buttons with press feedback, and brand-colored keyboard focus rings. All animations respect your operating system's reduced-motion setting.
+
+### Frosted-Glass Overlays
+Dropdowns, modals, the command palette, and the notification and options panels render as translucent frosted surfaces with smooth pop-in entrances — while content cards stay solid and readable.
+
+---
+
+## Full Feature List
+
+### Progressive Forms
+Optional fields are hidden by default — forms look clean out of the box. A "Show More" toggle reveals them when needed. Reduces cognitive load for new users.
+
+### Top Toolbar
+A persistent top bar adds a live clock, a **Today's View** shortcut, the global search, dark mode toggle, and language switcher — all in one row, always visible.
+
+### Language Switcher
+A searchable dropdown lists all enabled system languages. Selecting one applies it instantly — no page reload required. Respects Frappe's translation layer.
+
+### All Options Panel
+A slide-in panel (triggered from the toolbar) shows every workspace grouped by category, plus an **Appearance** section with theme mode, density, and font-size controls. Lets users explore and personalize without navigating away from their current page.
+
+### User Avatar Dropdown
+Clicking the user avatar opens a dropdown with an installed apps grid, edit profile, reset workspace layout, and logout — all in one place.
+
+### Module Switcher — `Ctrl+M`
+Press `Ctrl+M` from anywhere to open a searchable workspace switcher. Type a module name and press Enter to jump to it instantly.
+
+### Named Theme Presets
+Save visual configurations as reusable profiles in Theme Studio. Built-in starting points (Primer`s, Forest, Midnight, Plum) make it quick to establish a base before refining the full design system.
+
+### Real-Time Theme Sync
+When a System Manager publishes Theme Studio, color, branding, layout, and feature changes propagate to connected users through Frappe's realtime layer.
+
+### Refined Data & Charts
+Tabular numerals keep columns of figures perfectly aligned in list views, report grids, and dashboard number cards. Charts get softer gridlines, hover focus on bars, and elevated tooltips that stay fully readable in dark mode.
+
+Theme Studio's **Chart System** can now edit global chart defaults and permission-visible individual ERPNext charts. Supported surfaces include Dashboard Charts, Dashboard Graphs, Query/Script Report charts, and Number Card sparklines. Controls cover chart structure, surfaces, series and palettes, axes, legends, labels, tooltips, animation, interaction, and the safe advanced allowlist. A selected runtime chart also exposes stable per-series line/bar/fill overrides. Resetting one property or one chart falls back to the global chart layer; resetting global charts falls back to the built-in system defaults.
+
+### Details Everywhere
+Keycap-styled keyboard hints, thin floating scrollbars, brand-tinted text selection, shimmer on loading placeholders, and a brand accent on the selected command-palette row.
+
+### Setup Guide Banner
+On first launch, a checklist banner guides System Manager users through the initial configuration steps: set company name, upload logo, choose brand colors. Dismisses permanently once complete.
+
+---
+
+<!-- ## Screenshots
+
+| Login Page | Today's View |
+|:---:|:---:|
+| ![Login Page](docs/screenshots/login.png) | ![Today's View](docs/screenshots/smart-home.png) |
+
+| Theme Studio | Dark Mode |
+|:---:|:---:|
+| ![Theme Studio](docs/screenshots/theme-studio.png) | ![Dark Mode](docs/screenshots/dark-mode.png) |
+
+| Command Palette | Icon Rail Sidebar |
+|:---:|:---:|
+| ![Command Palette](docs/screenshots/command-palette.png) | ![Icon Rail Sidebar](docs/screenshots/sidebar.png) |
+
+![All Apps](docs/screenshots/All-apps.png)
+
+--- -->
+
+## Requirements
+
+| Requirement | Version |
+|---|---|
+| Frappe Framework | v16 |
+| ERPNext | v16 (optional — works on any Frappe app) |
+| Python | 3.10+ |
+| Node | 18+ |
+
+---
+
+## Setup Your Branding (5 minutes)
+
+Open **Theme Studio** with `Ctrl+K` or visit `/desk/theme-studio`.
+
+| Field | What it does |
+|---|---|
+| Company Name | Shown in the navbar — replaces "ERPNext" |
+| Company Logo | Shown in the navbar and login page |
+| Brand Color | Sets sidebar, navbar, and login page background |
+| Accent Color | Sets buttons, active states, and highlights |
+
+**Tip:** The **Quick Presets** row above the color pickers lets you apply a complete color pair in one click. Click any swatch → both fields update → click **Save**.
+
+Click **Save** — the entire system updates instantly.
+
+---
+
+## How the Color System Works
+
+You only need to pick **two colors**. Everything else is generated automatically.
+
+```
+Brand Color  →  sidebar background, navbar, login page
+               + auto-generates: hover tints, border colors, page tint
+
+Accent Color →  buttons, active sidebar item, highlights
+               + auto-generates: button hover, pressed state
+```
+
+This means any company — whether their brand is navy, green, red, or black — gets a complete, consistent color system from just two color pickers.
+
+**Example:** Set Brand Color to `#006B3C` (green). Sidebar becomes green, login page becomes green, page background becomes a very light green tint. Set it back to `#1B3F7E` (navy) and everything reverts. No code, no rebuild.
+
+---
+
+## Default Colors
+
+| Color | Hex | Used For |
+|---|---|---|
+| Brand | `#1B3F7E` | Sidebar, navbar, login |
+| Accent | `#F57C00` | Buttons, active items |
+| Page Background | Auto-generated | Light tint of brand color |
+| Cards / Forms | `#FFFFFF` | All content surfaces |
+
+---
+
+## Keyboard Shortcuts
+
+| Key | Action |
+|---|---|
+| `Ctrl+K` / `Cmd+K` | Open command palette |
+| `↑` `↓` | Move through results |
+| `Enter` | Open selected item |
+| `Esc` | Close palette |
+
+---
+
+## Compatibility
+
+| Frappe Version | Status |
+|---|---|
+| v16 (all releases, v16.0 – v16.50+) | ✅ Fully supported — the split-screen login is checked against Frappe's login styles from both before and after the v16.26 login redesign, and the Icon Rail against both the classic sidebar and the v16.50 Dock navigation |
+| v15 | ⚠️ Not tested |
+| v14 | ❌ Not supported |
+
+Primers Desk tracks Frappe v16 API changes across minor releases — internal shims resolve renamed core methods automatically, so the app works on older production benches and the latest releases alike. All Desk navigation access goes through one compatibility layer (`public/js/frappe_compat.js`) that detects Frappe's navigation by feature rather than version; `tests/frappe_compat/check_frappe_surface.py` checks a new Frappe release against it before you update.
+
+Works with ERPNext and any other Frappe-based application.
+
+---
+
+---
+
+## License
+
+MIT License — free to use, modify, and distribute commercially.
+
+See [LICENSE](license.txt) for full details.
+
+---
+
+## About Primer`s
+
+Primer`s builds Frappe/ERPNext products for businesses globally,
+
+- Website: [primers.com](https://primers.Cloud)
+<!-- - Email: sales@primers.com -->
+- WhatsApp: +20 10 38971290
+
+<!-- **Other products:**
+- [Edvronix](https://primers.com/edvronix) — School management system built on ERPNext. Fee collection, attendance, timetables, parent portal, and more. -->
+
+---
+
+## Support
+
+Something not working? Open an issue on [GitHub Issues](https://github.com/Primer`s/Primer`s-Desk/issues) or contact us directly.
+
+- Email: sales@primers.com
+- WhatsApp: +92 307 9484220
+
+---
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you'd like to change.

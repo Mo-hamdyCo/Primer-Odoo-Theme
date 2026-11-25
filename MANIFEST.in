@@ -1,0 +1,4 @@
+include MANIFEST.in
+include *.json *.md *.py *.txt
+recursive-include primers_desk *.css *.html *.ico *.js *.json *.md *.png *.py *.svg *.txt
+recursive-exclude primers_desk *.pyc
